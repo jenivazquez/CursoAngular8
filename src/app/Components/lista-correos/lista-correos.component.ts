@@ -15,14 +15,16 @@ export class ListaCorreosComponent implements OnInit {
       asunto: "Prueba primer correo",
       cuerpo: "Este es un correo de prueba para la segunda práctica del curso de Angular que consiste en mostrar un listado de correos",
       emisor: "jeni@prueba.es",
-      receptor: "lucia@prueba.es"
+      receptor: "lucia@prueba.es",
+      leido: true
     }
 
     const correo2 = {
       asunto: "Prueba segundo correo",
       cuerpo: "Este es el segundo correo de prueba para la práctica de angular",
       emisor: "jeni@prueba.es",
-      receptor: "josua@prueba.es"
+      receptor: "josua@prueba.es",
+      leido: false
     }
 
     this.listaCorreos = [];
