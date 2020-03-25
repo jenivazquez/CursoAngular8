@@ -1,0 +1,23 @@
+<h1>Listado de correos</h1>
+
+<table border="1px">
+
+    <tr>
+        <th>Leído</th>
+        <th>Emisor</th>
+        <th>Receptor</th>
+        <th>Asunto</th>
+    </tr>
+
+    <tr *ngFor="let correo of listaCorreos">
+        <td>
+            <div *ngIf="correo.leido">Sí</div>
+            <div *ngIf="!correo.leido">No</div>
+        </td>
+        <td>{{correo.emisor}}</td>
+        <td>{{correo.receptor}}</td>
+        <td>{{correo.asunto}}</td>
+    </tr>
+
+</table>
+
