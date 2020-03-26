@@ -7,16 +7,20 @@
         <th>Emisor</th>
         <th>Receptor</th>
         <th>Asunto</th>
+        <th>Pendiente</th>
     </tr>
 
-    <tr *ngFor="let correo of listaCorreos">
+    <tr *ngFor="let correo of listaCorreos; index as i;">
         <td>
-            <div *ngIf="correo.leido">Sí</div>
-            <div *ngIf="!correo.leido">No</div>
+            <input type="radio" name="leido{{i}}" [(ngModel)]="correo.leido" [value]=true> Si
+            <input type="radio" name="leido{{i}}" [(ngModel)]="correo.leido" [value]=false> No
         </td>
         <td>{{correo.emisor}}</td>
         <td>{{correo.receptor}}</td>
         <td>{{correo.asunto}}</td>
+        <td>
+            <div *ngIf="!correo.leido">X</div>
+        </td> 
     </tr>
 
 </table>
