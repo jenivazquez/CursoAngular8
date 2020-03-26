@@ -30,7 +30,7 @@
         </tr>
 
         <tr *ngIf="correo.respuesta" style="text-align: left;">
-            <app-nuevo-correo [correo]="correo"></app-nuevo-correo>
+            <app-nuevo-correo [correo]="correo" (eventoCierre)="cierreRespuesta(correo)"></app-nuevo-correo>
         </tr>
 
     </ng-container>
