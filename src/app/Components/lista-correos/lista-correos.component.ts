@@ -9,7 +9,6 @@ export class ListaCorreosComponent implements OnInit {
 
   listaCorreos: any[];
   respuesta: boolean;
-  correoRespuesta: any;
 
   constructor() {
 
@@ -55,8 +54,7 @@ export class ListaCorreosComponent implements OnInit {
   }
 
   clickResponder(correo) {
-    this.respuesta = !this.respuesta;
-    this.correoRespuesta = correo;
+    correo.respuesta = !correo.respuesta;
   }
 
 }

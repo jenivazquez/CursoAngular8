@@ -11,23 +11,30 @@
         <th>Acción</th>
     </tr>
 
-    <tr *ngFor="let correo of listaCorreos; index as i;">
-        <td>
-            <input type="radio" name="leido{{i}}" [(ngModel)]="correo.leido" [value]=true> Si
-            <input type="radio" name="leido{{i}}" [(ngModel)]="correo.leido" [value]=false> No
-        </td>
-        <td>
-            <div *ngIf="!correo.leido">X</div>
-        </td> 
-        <td>{{correo.emisor}}</td>
-        <td>{{correo.receptor}}</td>
-        <td>{{correo.asunto}}</td>
-        <td>
-            <button (click)=clickResponder(correo)>Responder</button>
-        </td>
-    </tr>
+    <ng-container *ngFor="let correo of listaCorreos; index as i;">
+
+        <tr>
+            <td>
+                <input type="radio" name="leido{{i}}" [(ngModel)]="correo.leido" [value]=true> Si
+                <input type="radio" name="leido{{i}}" [(ngModel)]="correo.leido" [value]=false> No
+            </td>
+            <td>
+                <div *ngIf="!correo.leido">X</div>
+            </td> 
+            <td>{{correo.emisor}}</td>
+            <td>{{correo.receptor}}</td>
+            <td>{{correo.asunto}}</td>
+            <td>
+                <button (click)=clickResponder(correo)>Responder</button>
+            </td>
+        </tr>
+
+        <tr *ngIf="correo.respuesta" style="text-align: left;">
+            <app-nuevo-correo [correo]="correo"></app-nuevo-correo>
+        </tr>
+
+    </ng-container>
     
-    <app-nuevo-correo *ngIf="respuesta" [correo]="correoRespuesta"></app-nuevo-correo>
 
 </table>
 
