@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CorreoComponent } from './Components/correo/correo.component';
 import { ListaCorreosComponent } from './Components/lista-correos/lista-correos.component';
-import { NuevoCorreoComponent } from './nuevo-correo/nuevo-correo.component';
+import { NuevoCorreoComponent } from './Components/nuevo-correo/nuevo-correo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { NuevoCorreoComponent } from './nuevo-correo/nuevo-correo.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],
