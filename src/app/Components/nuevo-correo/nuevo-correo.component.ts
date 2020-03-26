@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -11,13 +11,14 @@ export class NuevoCorreoComponent implements OnInit {
   nuevoCorreo: FormGroup;
   submitted = false;
   @Input() correo: any;
+  @Output() eventoCierre: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
     this.nuevoCorreo = this.formBuilder.group({
-      asunto: ['', [Validators.required, Validators.maxLength(20)]],
+      asunto: ['', [Validators.required, Validators.maxLength(50)]],
       cuerpo: ['', [Validators.required, Validators.maxLength(100)]],
       receptor: ['', [Validators.required, Validators.email]]
     });
@@ -53,6 +54,7 @@ export class NuevoCorreoComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.nuevoCorreo.reset();
+    this.eventoCierre.emit();
   }
 
 }

@@ -57,4 +57,8 @@ export class ListaCorreosComponent implements OnInit {
     correo.respuesta = !correo.respuesta;
   }
 
+  cierreRespuesta(correo) {
+    correo.respuesta = !correo.respuesta;
+  }
+
 }
