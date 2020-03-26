@@ -1,1 +1,40 @@
-<p>nuevo-correo works!</p>
+<h1>Enviar correo</h1>
+
+<form [formGroup]="nuevoCorreo" (ngSubmit)="onSubmit()">
+
+    <div>
+        <div>
+            <label>Asunto </label>
+            <input type="text" formControlName="asunto"/>
+            <div *ngIf="submitted && formulario.asunto.errors">
+                <div *ngIf="formulario.asunto.errors.required">El asunto es un campo obligatorio</div>
+                <div *ngIf="formulario.asunto.errors.maxlength">El asunto debe tener un máximo de 20 caracteres</div>
+            </div>
+        </div>
+
+        <div>
+            <label>Receptor </label>
+            <input type="text" formControlName="receptor"/>
+            <div *ngIf="submitted && formulario.receptor.errors">
+                <div *ngIf="formulario.receptor.errors.required">El receptor es un campo obligatorio</div>
+                <div *ngIf="formulario.receptor.errors.email">El receptor debe ser un email válido</div>
+            </div>
+        </div>
+    
+        <div>
+            <label>Cuerpo </label>
+            <textarea formControlName="cuerpo"></textarea>
+            <div *ngIf="submitted && formulario.cuerpo.errors">
+                <div *ngIf="formulario.cuerpo.errors.required">El cuerpo es un campo obligatorio</div>
+                <div *ngIf="formulario.cuerpo.errors.maxlength">El cuerpo debe tener un máximo de 20 caracteres</div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div>
+        <button>Enviar</button>
+        <button type="reset" (click)="onReset()">Cancelar</button>
+    </div>
+
+</form>
