@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   isLogged(): boolean {
+    console.log('login profile: ' + this.login.profile);
     this.profile = this.login.profile;
     return this.login.isLogged();
   }
