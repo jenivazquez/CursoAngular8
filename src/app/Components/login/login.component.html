@@ -1,0 +1,10 @@
+
+<div *ngIf="isLogged()">
+    <button (click)="signOut()">Logout</button>
+    <p>Nombre: {{profile.Ad}}</p>
+    <p>Email: {{profile.Au}}</p>
+</div>
+<div *ngIf="!isLogged()">
+    <button (click)="signIn()">Login</button>
+</div>
+

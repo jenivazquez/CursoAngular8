@@ -12,4 +12,8 @@ export class AvisosComponent implements OnInit {
 
   ngOnInit() {}
 
+  get serviceAviso() {
+    return this.avisosService;
+  }
+
 }
