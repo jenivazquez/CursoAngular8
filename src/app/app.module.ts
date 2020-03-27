@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './Menu/menu/menu.component';
 import { EnviarCorreoComponent } from './Views/enviar-correo/enviar-correo.component';
 import { HomeComponent } from './Views/home/home.component';
+import { DetalleCorreoComponent } from './Views/detalle-correo/detalle-correo.component';
 
 const gapiClientConfig: NgGapiClientConfig = {
   client_id: '477024369379-d47ctr8bpkisn9a3vo2mnsbmhdhp59do.apps.googleusercontent.com',
@@ -39,7 +40,8 @@ const gapiClientConfig: NgGapiClientConfig = {
     LoginComponent,
     MenuComponent,
     EnviarCorreoComponent,
-    HomeComponent
+    HomeComponent,
+    DetalleCorreoComponent
   ],
   imports: [
     BrowserModule,
