@@ -11,6 +11,7 @@ import { CorreosRecibidosComponent } from './Views/correos-recibidos/correos-rec
 import { AvisosComponent } from './Components/avisos/avisos.component';
 import { LoginComponent } from './Components/login/login.component';
 import { GoogleApiModule, NG_GAPI_CONFIG, NgGapiClientConfig } from 'ng-gapi';
+import { HttpClientModule } from '@angular/common/http';
 
 const gapiClientConfig: NgGapiClientConfig = {
   client_id: '477024369379-d47ctr8bpkisn9a3vo2mnsbmhdhp59do.apps.googleusercontent.com',
@@ -43,6 +44,7 @@ const gapiClientConfig: NgGapiClientConfig = {
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig
     }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

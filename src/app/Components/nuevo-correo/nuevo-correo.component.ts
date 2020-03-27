@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AvisosService } from 'src/app/Services/avisos.service';
+import { GmailService } from 'src/app/Services/gmail.service';
 
 @Component({
   selector: 'app-nuevo-correo',
@@ -14,7 +15,7 @@ export class NuevoCorreoComponent implements OnInit {
   @Input() correo: any;
   @Output() eventoCierre: EventEmitter<any> = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private avisosService: AvisosService) { }
+  constructor(private formBuilder: FormBuilder, private avisosService: AvisosService, private gmail: GmailService) { }
 
   ngOnInit() {
 
@@ -44,12 +45,23 @@ export class NuevoCorreoComponent implements OnInit {
       return;
     }
 
-    let correo = this.nuevoCorreo.value;
-    correo.leido = false;
-    correo.emisor = 'jeni@prueba.es';
+    const correo = this.nuevoCorreo.value;
+
+    const texto = correo.cuerpo;
+    const destinatario = correo.destinatario;
+    const asunto = correo.titulo;
 
     this.onReset();
-    this.avisosService.showMessage('El correo ha sido enviado');
+
+    this.gmail.sendMessage(texto, destinatario, asunto).subscribe(
+      (response) => {
+        console.log('respuesta envio', response);
+        this.avisosService.showMessage('Correo enviado a ${correo.destinatario}');
+      },
+      (error) => {
+        this.avisosService.showMessage('Fallo en el envio');
+      }
+    );
   }
 
   onCancel(){

@@ -14,7 +14,17 @@ export class LoginService {
   userId: string;
 
   constructor(private ngZone: NgZone, private googleAuth: GoogleAuthService) {
+    if(this.isLogged()){
+      this.setUser(this.getSessionUser());
+    }
+  }
 
+  public getSessionUser(): GoogleUser {
+    const user: string = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+    if (!user) {
+      throw new Error('no token set , authentication required');
+    }
+    return JSON.parse(user);
   }
 
   public signIn(): void {
