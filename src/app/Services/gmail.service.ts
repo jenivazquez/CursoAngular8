@@ -15,7 +15,8 @@ export class GmailService {
     return this.http.get(url, { headers });
   };
 
-  public getMessage = function(id: string) {
+  public getMessage = function (id: string) {
+
     const url = 'https://www.googleapis.com/gmail/v1/users/' + this.login.userId + '/messages/' + id;
     const headers = new HttpHeaders({ Authorization: `Bearer ${this.login.tokenUser}` });
 
@@ -23,6 +24,21 @@ export class GmailService {
     params = params.append('format', 'full');
 
     return this.http.get(url, { headers: headers, params: params });
+  };
+
+  public sendMessage = function (text: string, to: string, subject: string) {
+
+    const url = 'https://www.googleapis.com/gmail/v1/users/' + this.login.userId + '/messages/send';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Authorization: `Bearer ${this.login.tokenUser}` });
+
+    const emailTemplate =
+      'Content-Type:  text/plain; charset=\'UTF-8\'\nContent-length: 5000\nContent-Transfer-Encoding: message/rfc2822\n' +
+      `To: ${to}\n` +
+      `Subject: ${subject}\n\n` +
+      `${text}`;
+    const base64EncodedEmail = btoa(emailTemplate).replace(/\+/g, '-').replace(/\//g, '_');
+
+    return this.http.post(url, { 'raw': base64EncodedEmail }, { headers: headers });
   };
 
 }
