@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GmailService } from 'src/app/Services/gmail.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-correos',
@@ -11,7 +12,7 @@ export class ListaCorreosComponent implements OnInit {
   listaCorreos: any[];
   respuesta: boolean;
 
-  constructor(private gmail: GmailService) {
+  constructor(private gmail: GmailService, private router: Router) {
     this.listaCorreos = [];
   }
 
@@ -25,6 +26,10 @@ export class ListaCorreosComponent implements OnInit {
 
   cierreRespuesta(correo) {
     correo.respuesta = !correo.respuesta;
+  }
+
+  detalleCorreo(correo) {
+    this.router.navigate(['/email', {correo: JSON.stringify(correo)}]);
   }
 
   getMessages() {

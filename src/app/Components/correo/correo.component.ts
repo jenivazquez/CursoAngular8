@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-correo',
@@ -9,16 +10,18 @@ export class CorreoComponent implements OnInit {
 
   correo: any;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.correo = {
-      asunto: 'Prueba correo',
-      cuerpo: 'Este es una correo de prueba para la primera práctica del curso de Angular 8',
-      emisor: 'jeni@prueba.es',
-      receptor: 'lucia@prueba.es'
+      asunto: '',
+      cuerpo: '',
+      emisor: '',
+      receptor: ''
     };
   }
 
   ngOnInit(): void {
+    const paramCorreo = this.route.snapshot.paramMap.get('correo');
+    this.correo = JSON.parse(paramCorreo);
   }
 
 }
