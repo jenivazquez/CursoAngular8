@@ -47,21 +47,22 @@ export class NuevoCorreoComponent implements OnInit {
 
     const correo = this.nuevoCorreo.value;
 
-    const texto = correo.cuerpo;
-    const destinatario = correo.destinatario;
-    const asunto = correo.titulo;
+    const cuerpo = correo.cuerpo;
+    const receptor = correo.receptor;
+    const asunto = correo.asunto;
 
-    this.onReset();
-
-    this.gmail.sendMessage(texto, destinatario, asunto).subscribe(
+    this.gmail.sendMessage(cuerpo, receptor, asunto).subscribe(
       (response) => {
         console.log('respuesta envio', response);
-        this.avisosService.showMessage('Correo enviado a ${correo.destinatario}');
+        this.avisosService.showMessage('Correo enviado a ' + correo.receptor);
       },
       (error) => {
+        console.error(error);
         this.avisosService.showMessage('Fallo en el envio');
       }
-    );
+      );
+
+    this.onReset();
   }
 
   onCancel(){

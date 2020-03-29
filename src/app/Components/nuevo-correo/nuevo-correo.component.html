@@ -1,40 +1,46 @@
-<h2>Nuevo correo</h2>
+<mat-card class="example-card">
 
-<form [formGroup]="nuevoCorreo" (ngSubmit)="onSubmit()">
+    <mat-card-header>
+        <mat-card-title>Nuevo correo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-    <div>
-        <div>
-            <label>Asunto </label>
-            <input type="text" formControlName="asunto"/>
-            <div *ngIf="submitted && formulario.asunto.errors">
-                <div *ngIf="formulario.asunto.errors.required">El asunto es un campo obligatorio</div>
-                <div *ngIf="formulario.asunto.errors.maxlength">El asunto debe tener un máximo de 20 caracteres</div>
-            </div>
-        </div>
+        <form [formGroup]="nuevoCorreo" (ngSubmit)="onSubmit()" class="example-form">
 
-        <div>
-            <label>Receptor </label>
-            <input type="text" formControlName="receptor"/>
-            <div *ngIf="submitted && formulario.receptor.errors">
-                <div *ngIf="formulario.receptor.errors.required">El receptor es un campo obligatorio</div>
-                <div *ngIf="formulario.receptor.errors.email">El receptor debe ser un email válido</div>
-            </div>
-        </div>
-    
-        <div>
-            <label>Cuerpo </label>
-            <textarea formControlName="cuerpo"></textarea>
-            <div *ngIf="submitted && formulario.cuerpo.errors">
-                <div *ngIf="formulario.cuerpo.errors.required">El cuerpo es un campo obligatorio</div>
-                <div *ngIf="formulario.cuerpo.errors.maxlength">El cuerpo debe tener un máximo de 20 caracteres</div>
-            </div>
-        </div>
-    
-    </div>
+            <mat-form-field color="accent" class="col-12">
+                <mat-label>Asunto</mat-label>
+                <input matInput formControlName="asunto" placeholder="Asunto">
+                <mat-error *ngIf="submitted && formulario.asunto.errors">
+                    <mat-error *ngIf="formulario.asunto.errors.required">El asunto es un campo obligatorio</mat-error>
+                    <mat-error *ngIf="formulario.asunto.errors.maxlength">El asunto debe tener un máximo de 20 caracteres</mat-error>
+                </mat-error>
+            </mat-form-field>
 
-    <div>
-        <button>Enviar</button>
-        <button type="reset" (click)="onCancel()">Cancelar</button>
-    </div>
+            <mat-form-field color="accent" class="col-12">
+                <mat-label>Receptor</mat-label>
+                <input matInput formControlName="receptor" placeholder="receptor">
+                <mat-error *ngIf="submitted && formulario.receptor.errors">
+                    <mat-error *ngIf="formulario.receptor.errors.required">El receptor es un campo obligatorio</mat-error>
+                    <mat-error *ngIf="formulario.receptor.errors.email">El receptor debe ser un email válido</mat-error>
+                </mat-error>
+            </mat-form-field>
 
-</form>
+            <mat-form-field color="accent" class="col-12">
+                <mat-label>Cuerpo</mat-label>
+                <input matInput formControlName="cuerpo" placeholder="cuerpo">
+                <mat-error *ngIf="submitted && formulario.cuerpo.errors">
+                    <mat-error *ngIf="formulario.cuerpo.errors.required">El cuerpo es un campo obligatorio</mat-error>
+                    <mat-error *ngIf="formulario.cuerpo.errors.maxlength">El cuerpo debe tener un máximo de 20 caracteres</mat-error>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="accent">Enviar</button>
+                <button mat-raised-button color="warn" type="reset" (click)="onCancel()">Cancelar</button>
+            </mat-card-actions>
+
+        </form>
+
+    </mat-card-content>
+
+</mat-card>

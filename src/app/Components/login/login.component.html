@@ -1,10 +1,21 @@
+<mat-card class="example-card">
 
-<div *ngIf="isLogged()">
-    <button (click)="signOut()">Logout</button>
-    <p>Nombre: {{profile.Ad}}</p>
-    <p>Email: {{profile.Au}}</p>
-</div>
-<div *ngIf="!isLogged()">
-    <button (click)="signIn()">Login</button>
-</div>
+    <h1>Bienvenido!</h1>
 
+    <div *ngIf="isLogged()">
+        <mat-card-header>
+            <mat-card-title>{{profile.Ad}}</mat-card-title>
+            <mat-card-subtitle>{{profile.Au}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+            <button mat-stroked-button (click)="signOut()">Logout</button>
+        </mat-card-actions>
+    </div>
+
+    <div *ngIf="!isLogged()">
+        <mat-card-actions>
+            <button mat-stroked-button (click)="signIn()">Login</button>
+        </mat-card-actions>
+    </div>
+
+</mat-card>
