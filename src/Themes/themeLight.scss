@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$palette-app-primary: mat-palette($mat-teal, 600);
+$palette-app-accent: mat-palette($mat-light-green, 500);
+$palette-app-warn: mat-palette($mat-red, 500);
+
+$my-light-theme: mat-light-theme(
+  $palette-app-primary,
+  $palette-app-accent,
+  $palette-app-warn
+);
+
+/* Exportar variables para usar en scss */
+$primary-color: mat-color($palette-app-primary);
+$accent-color: mat-color($palette-app-accent);
+$warn-color: mat-color($palette-app-warn);
+$grey-color: mat-color($mat-grey, 200);
+$primary-contrast-color: mat-contrast($palette-app-primary, A500);
+
+th {
+  background-color: #a8c0be;
+}
+
+
+.mat-toolbar {
+  background-color: $primary-color !important;
+}

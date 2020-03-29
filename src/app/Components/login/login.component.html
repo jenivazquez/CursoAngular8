@@ -8,13 +8,13 @@
             <mat-card-subtitle>{{profile.Au}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-            <button mat-stroked-button (click)="signOut()">Logout</button>
+            <button mat-raised-button color="warn" (click)="signOut()">Logout</button>
         </mat-card-actions>
     </div>
 
     <div *ngIf="!isLogged()">
         <mat-card-actions>
-            <button mat-stroked-button (click)="signIn()">Login</button>
+            <button mat-raised-button color="accent" (click)="signIn()">Login</button>
         </mat-card-actions>
     </div>
 
