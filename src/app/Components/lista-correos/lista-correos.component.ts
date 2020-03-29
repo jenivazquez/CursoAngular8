@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { GmailService } from 'src/app/Services/gmail.service';
 import { Router } from '@angular/router';
+import { trigger, state, transition, style, animate } from '@angular/animations';
+import { AvisosService } from 'src/app/Services/avisos.service';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-lista-correos',
   templateUrl: './lista-correos.component.html',
-  styleUrls: ['./lista-correos.component.scss']
+  styleUrls: ['./lista-correos.component.scss'],
 })
+
 export class ListaCorreosComponent implements OnInit {
 
   listaCorreos: any[];
-  respuesta: boolean;
+  respuesta = false;
+  displayedColumns: string[] = ['emisor', 'asunto', 'acciones'];
+  dataSource = new MatTableDataSource<any>();
+  correoActivo: any;
 
-  constructor(private gmail: GmailService, private router: Router) {
+  constructor(private gmail: GmailService, private router: Router, private servicioAvisos: AvisosService) {
     this.listaCorreos = [];
   }
 
@@ -21,11 +29,13 @@ export class ListaCorreosComponent implements OnInit {
   }
 
   clickResponder(correo) {
-    correo.respuesta = !correo.respuesta;
+    this.correoActivo = correo;
+    this.correoActivo.respuesta = !this.correoActivo.respuesta;
   }
 
-  cierreRespuesta(correo) {
-    correo.respuesta = !correo.respuesta;
+  cierreRespuesta() {
+    this.correoActivo.respuesta = !this.correoActivo.respuesta;
+    this.correoActivo = undefined;
   }
 
   detalleCorreo(correo) {
@@ -39,7 +49,7 @@ export class ListaCorreosComponent implements OnInit {
         this.getMessage(element.id);
       });
     },
-      (err) => this.error(err),
+      (err) => this.error(err)
     );
   }
 
@@ -53,14 +63,15 @@ export class ListaCorreosComponent implements OnInit {
         emisor: emisor ? emisor.value : undefined,
         asunto: asunto ? asunto.value : undefined,
       };
-      this.listaCorreos.push(message);
+      this.dataSource.data.push(message);
+      this.dataSource._updateChangeSubscription();
     },
       (error) => this.error(error)
     );
   }
 
   error(err) {
-    console.warn(err);
+    this.servicioAvisos.showMessage('Se ha producido un error');
   }
 
 }

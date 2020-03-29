@@ -16,6 +16,17 @@ import { MenuComponent } from './Menu/menu/menu.component';
 import { EnviarCorreoComponent } from './Views/enviar-correo/enviar-correo.component';
 import { HomeComponent } from './Views/home/home.component';
 import { DetalleCorreoComponent } from './Views/detalle-correo/detalle-correo.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const gapiClientConfig: NgGapiClientConfig = {
   client_id: '477024369379-d47ctr8bpkisn9a3vo2mnsbmhdhp59do.apps.googleusercontent.com',
@@ -52,7 +63,17 @@ const gapiClientConfig: NgGapiClientConfig = {
       provide: NG_GAPI_CONFIG,
       useValue: gapiClientConfig
     }),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatInputModule,
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
