@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { Correo } from '../Interface/Correo';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class GmailService {
     let params = new HttpParams();
     params = params.append('maxResults', '10');
 
-    return this.http.get(url, { headers:headers, params: params } );
+    return this.http.get(url, { headers: headers, params: params });
   };
 
   public getMessage = function (id: string) {
@@ -27,7 +29,8 @@ export class GmailService {
     let params = new HttpParams();
     params = params.append('format', 'full');
 
-    return this.http.get(url, { headers: headers, params: params });
+    let respuestaObservable = this.http.get(url, { headers: headers, params: params });
+    return respuestaObservable.pipe(map(this.helperGetMessage));
   };
 
   public sendMessage = function (text: string, to: string, subject: string) {
@@ -44,5 +47,25 @@ export class GmailService {
 
     return this.http.post(url, { 'raw': base64EncodedEmail }, { headers: headers });
   };
+
+  private helperGetMessage = (response: any) => {
+
+    let correo: Correo;
+
+    if (response) {
+      const emisor = response.payload.headers.find(e => e.name === 'From');
+      const asunto = response.payload.headers.find(e => e.name === 'Subject');
+      correo = {
+        id: response.id,
+        cuerpo: response.snippet,
+        emisor: emisor ? emisor.value : undefined,
+        receptor: '',
+        asunto: asunto ? asunto.value : undefined,
+      };
+    }
+
+    return correo;
+
+  }
 
 }
