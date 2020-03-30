@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AvisosService } from 'src/app/Services/avisos.service';
 import { GmailService } from 'src/app/Services/gmail.service';
+import { Correo } from 'src/app/Interface/Correo';
 
 @Component({
   selector: 'app-nuevo-correo',
@@ -12,7 +13,7 @@ export class NuevoCorreoComponent implements OnInit {
 
   nuevoCorreo: FormGroup;
   submitted = false;
-  @Input() correo: any;
+  @Input() correo: Correo;
   @Output() eventoCierre: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private avisosService: AvisosService, private gmail: GmailService) { }
@@ -25,7 +26,7 @@ export class NuevoCorreoComponent implements OnInit {
       receptor: ['', [Validators.required, Validators.email]]
     });
 
-    if(this.correo !== undefined) {
+    if (this.correo !== undefined) {
       this.nuevoCorreo.patchValue({
         asunto : 'Re: ' + this.correo.asunto,
         receptor: this.correo.emisor
