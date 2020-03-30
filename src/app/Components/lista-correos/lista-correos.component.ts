@@ -5,6 +5,7 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 import { AvisosService } from 'src/app/Services/avisos.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Correo } from 'src/app/Interface/Correo';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ListaCorreosComponent implements OnInit {
   displayedColumns: string[] = ['emisor', 'asunto', 'acciones'];
   dataSource = new MatTableDataSource<Correo>();
   correoActivo: any;
+  subscription: Subscription;
 
   constructor(private gmail: GmailService, private router: Router, private servicioAvisos: AvisosService) {
     this.listaCorreos = [];
@@ -40,18 +42,18 @@ export class ListaCorreosComponent implements OnInit {
   }
 
   detalleCorreo(correo) {
-    this.router.navigate(['/email', {correo: JSON.stringify(correo)}]);
+    this.router.navigate(['/email', { correo: JSON.stringify(correo) }]);
   }
 
   getMessages() {
-    this.gmail.getMessages().subscribe((response) => {
+    this.subscription = (this.gmail.getMessages().subscribe((response) => {
       const messages = response.messages;
       messages.forEach(element => {
         this.getMessage(element.id);
       });
     },
       (err) => this.error(err)
-    );
+    ));
   }
 
   getMessage(id: string) {
@@ -65,6 +67,12 @@ export class ListaCorreosComponent implements OnInit {
 
   error(err) {
     this.servicioAvisos.showMessage('Se ha producido un error');
+  }
+
+  ngOnDestroy() {
+    if (!this.subscription.closed) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }
