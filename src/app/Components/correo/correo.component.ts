@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Correo } from 'src/app/Interface/Correo';
 
 @Component({
   selector: 'app-correo',
@@ -8,14 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CorreoComponent implements OnInit {
 
-  correo: any;
+  correo: Correo;
 
   constructor(private route: ActivatedRoute) {
     this.correo = {
-      asunto: '',
-      cuerpo: '',
+      id: '',
       emisor: '',
-      receptor: ''
+      receptor: '',
+      asunto: '',
+      cuerpo: ''
     };
   }
 

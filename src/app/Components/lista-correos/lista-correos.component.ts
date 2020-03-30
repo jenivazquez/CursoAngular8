@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { AvisosService } from 'src/app/Services/avisos.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { Correo } from 'src/app/Interface/Correo';
 
 
 @Component({
@@ -14,10 +15,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class ListaCorreosComponent implements OnInit {
 
-  listaCorreos: any[];
+  listaCorreos: Correo[];
   respuesta = false;
   displayedColumns: string[] = ['emisor', 'asunto', 'acciones'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<Correo>();
   correoActivo: any;
 
   constructor(private gmail: GmailService, private router: Router, private servicioAvisos: AvisosService) {
@@ -61,6 +62,7 @@ export class ListaCorreosComponent implements OnInit {
         id: response.id,
         cuerpo: response.snippet,
         emisor: emisor ? emisor.value : undefined,
+        receptor: '',
         asunto: asunto ? asunto.value : undefined,
       };
       this.dataSource.data.push(message);
